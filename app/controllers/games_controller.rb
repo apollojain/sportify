@@ -4,12 +4,19 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    #@games = Game.all
+    @games = Game.where("date between (?) and (?)", DateTime.now, DateTime.now + 120)
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
+  end
+
+  def upvote
+    @game = Game.find(params[:id])
+    @game.votes.create
+    redirect_to(@game)
   end
 
   # GET /games/new

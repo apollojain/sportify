@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :games
+  resources :games do
+    resources :comments
+    member do
+      post 'upvote'
+    end
+  end
+
   root :to => redirect('/games')
 
 

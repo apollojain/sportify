@@ -1,3 +1,13 @@
+<script>
+$(document).ready(function(){
+  $("#addcomment").hide();
+  $("#addcommentbtn").click(function(){
+    $("#addcomment").toggle();
+    $(this).hide();
+  });
+  });
+</script>
+
 <div id="newform">
 <p id="notice"><%= notice %></p>
 
@@ -16,25 +26,56 @@
 </p>
 
 <p>
-  <strong>Stattime:</strong>
+  <strong>Start time:</strong>
   <%= @game.stattime.hour %>:<%= @game.stattime.min %>
 </p>
 
 <p>
-  <strong>Endtime:</strong>
+  <strong>End time:</strong>
   <%= @game.endtime.hour %>:<%= @game.endtime.min %>
 </p>
 
 <p>
   <strong>Attendees:</strong>
   <%= @game.attendees %>
+  <%= pluralize(@game.votes.count, "attendee") %>
+  <%= button_to '+1', upvote_game_path(@game), method: :post %>
 </p>
+
+    
 
 <p>
   <strong>Description:</strong>
   <%= @game.description %>
 </p>
 
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<div id="comment" style="background-color:#C0C0C0; padding: 20px; width: 300px">
+  <h2 class="roboto" >Comments</h2>
+  <% @game.comments.each do |comment| %>
+    <p>
+      <strong><%= comment.commenter %></strong>: <%= comment.body %>
+    </p>
+  <% end %>
+  <button type="button" class="btn btn-primary" id="addcommentbtn">Add Comment</button>
+  <div id="addcomment" style="padding-left: 20px;">
+    <h4 class = "roboto">Add a comment:</h4>
+    <%= form_for([@game, @game.comments.build]) do |f| %>
+      <p>
+        <%= f.label :commenter %><br>
+        <%= f.text_field :commenter %>
+      </p>
+      <p>
+        <%= f.label :body %><br>
+        <%= f.text_area :body %>
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
+    <% end %>
+  </div>
+
+</div>
+
+
+Return to home by clicking "Sportify".
 </div>

@@ -25,11 +25,11 @@
     <%= f.date_select :date %>
   </div>
   <div class="field">
-    <%= f.label :stattime %><br>
+    <%= f.label "Start time" %><br>
     <%= f.time_select :stattime %>
   </div>
   <div class="field">
-    <%= f.label :endtime %><br>
+    <%= f.label "End time" %><br>
     <%= f.time_select :endtime %>
   </div>
   <div class="field">
@@ -39,4 +39,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  <%= show_simple_captcha(:object => 'user', :label => "human authentication") %>
 <% end %>
