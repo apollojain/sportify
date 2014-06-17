@@ -6,4 +6,5 @@ class Game < ActiveRecord::Base
 	validates :date, presence: true
 	validates :stattime, presence: true
 	validates :endtime, presence: true
+	apply_simple_captcha :message => "The secret Image and code were different", :add_to_base => true
 end

@@ -39,4 +39,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  <%= show_simple_captcha(:object => 'user', :label => "human authentication") %>
 <% end %>
