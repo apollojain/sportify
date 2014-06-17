@@ -1,0 +1,157 @@
+
+<script>
+
+$(document).ready(function(){
+  $("#gameaddress").hide();
+  $("#gamesport").hide();
+  $("#demo").hide();
+  extraCode();});
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+var geocoder;
+var map;
+var myCenter=new google.maps.LatLng(37.7833,122.4167);
+
+function initialize() {
+
+  geocoder = new google.maps.Geocoder();
+  extraCode();
+  var latlng = new google.maps.LatLng(37.8717, -122.2728);
+  var mapOptions = {
+    zoom: 4,
+    center: latlng
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    // Try HTML5 geolocation
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = new google.maps.LatLng(position.coords.latitude,
+                                       position.coords.longitude);
+
+      var infowindow = new google.maps.InfoWindow({
+        map: map,
+        position: pos,
+        content: 'Location found using HTML5.'
+      });
+
+      map.setCenter(pos);
+      map.setZoom(10);
+    }, function() {
+      handleNoGeolocation(true);
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+
+}
+
+
+function extraCode() {
+  var x = document.getElementById('gameaddress').innerHTML.split("|");
+  var y = document.getElementById('gamesport').innerHTML.split("|");
+  var z = document.getElementById('sportname').innerHTML.split("|");
+  if(x!="" && y != ""){
+    for(i = 0; i < x.length - 1; i ++){
+      addPin(x[i], y[i], z[i]);
+    }
+  }
+  
+}
+
+function addPin(address, data, sport) {
+  var spo= String(sport).replace(/\s+/, "").toLowerCase()
+
+    var ic;
+    if(spo == "soccer"){
+     ic = "soccer.png";
+    }else if(spo == "basketball"){
+      ic = "basketball.png"
+    }else if(spo == "frisbee" || spo == "ultimate" || spo == "ultimatefrisbee"){
+      ic = "frisbee.png"
+    }else if(spo == "tennis"){
+      ic = "tennis.png"
+    }else if(spo == "volleyball"){
+      ic = "volleyball.png"
+    }else if(spo == "golf"){
+      ic = "golf.png"
+    }else if(spo == "football"){
+      ic = "football.png"  
+    }else if(spo == "baseball"){
+      ic = "baseball.png"
+    }else if(spo == "hockey" || spo =="fieldhockey" || spo == "rollerhockey" || spo == "icehockey"){
+      ic = "hockey.png"
+    }else{
+      ic = "trophy.png";
+    }
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            icon: ic
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+          content: data
+          });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+          });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+  });
+}
+
+
+function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      map.setZoom(10);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+    
+
+    <div id="map-canvas" ></div>
+
+<div id="gameaddress">
+<% @games.each do |game| %>
+  <%= game.address %>|
+
+<% end %>
+</div>
+
+<div id="gamesport">
+<% @games.each do |game| %>
+  <%= link_to game.sport, game %> <br>
+  <%= game.date %> <br>
+  <%= game.stattime.hour %>:<%= game.stattime.min %> - <%= game.endtime.hour %>:<%= game.endtime.min %>
+
+  | 
+
+<% end %>
+</div>
+
+<div id="sportname">
+<% @games.each do |game| %><%= game.sport %>|<% end %>
+</div>
+
+<div id="panel">
+<center>
+      <input id="address" type="textbox" value="San Francisco, CA">
+      <input type="button" class="btn btn-primary" value="Search" onclick="codeAddress()">
+      </center>
+</div>
+
+

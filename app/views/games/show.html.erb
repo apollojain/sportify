@@ -1,0 +1,40 @@
+<div id="newform">
+<p id="notice"><%= notice %></p>
+
+<h1 class="roboto">
+  <%= @game.sport %>
+</h1>
+
+<p>
+  <strong>Address:</strong>
+  <%= @game.address %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @game.date %>
+</p>
+
+<p>
+  <strong>Stattime:</strong>
+  <%= @game.stattime.hour %>:<%= @game.stattime.min %>
+</p>
+
+<p>
+  <strong>Endtime:</strong>
+  <%= @game.endtime.hour %>:<%= @game.endtime.min %>
+</p>
+
+<p>
+  <strong>Attendees:</strong>
+  <%= @game.attendees %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @game.description %>
+</p>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
+</div>

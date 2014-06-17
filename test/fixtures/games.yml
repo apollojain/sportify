@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sport: MyString
+  address: MyString
+  date: 2014-06-15
+  stattime: 2014-06-15 17:48:20
+  endtime: 2014-06-15 17:48:20
+  attendees: 1
+  description: MyText
+
+two:
+  sport: MyString
+  address: MyString
+  date: 2014-06-15
+  stattime: 2014-06-15 17:48:20
+  endtime: 2014-06-15 17:48:20
+  attendees: 1
+  description: MyText
