@@ -14,11 +14,11 @@
 
   <div class="field">
     <%= f.label :sport %><br>
-    <%= f.text_field :sport %>
+    <%= f.text_field :sport, :value => 'ex. "Soccer"' %>
   </div>
   <div class="field">
     <%= f.label :address %><br>
-    <%= f.text_field :address %>
+    <%= f.text_field :address, :value => 'ex. "Underhill Field, Berkeley, CA"'  %>
   </div>
   <div class="field">
     <%= f.label :date %><br>
@@ -34,7 +34,7 @@
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :value => 'ex. "Everyone bring cleats and shin guards. Someone bring a ball."', :size => "100x10" %>
   </div>
   <div class="actions">
     <%= f.submit %>
