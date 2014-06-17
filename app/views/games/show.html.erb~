@@ -9,6 +9,7 @@ $(document).ready(function(){
 </script>
 
 <div id="newform">
+<p id="notice"><%= notice %></p>
 
 <h1 class="roboto">
   <%= @game.sport %>
