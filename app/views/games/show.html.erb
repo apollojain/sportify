@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 <p>
   <strong>Host:</strong>
-  <%= @game.host %>
+  <%= @game.user.first_name %> <%= @game.user.last_name %>
 </p>
 
 <p>
@@ -53,38 +53,9 @@ $(document).ready(function(){
   <%= @game.description %>
 </p>
 
-<div id="comment" style="background-color:#C0C0C0; padding: 20px; width: 300px">
-  <h2 class="roboto" >Comments</h2>
-  <% @game.comments.each do |comment| %>
-    <p>
-      <strong><%= comment.commenter %></strong>: <%= comment.body %>
-    </p>
-  <% end %>
-  <button type="button" class="btn btn-primary" id="addcommentbtn">Add Comment</button>
-  <div id="addcomment" style="padding-left: 20px;">
-    <h4 class = "roboto">Add a comment:</h4>
-    <%= form_for([@game, @game.comments.build]) do |f| %>
-      <p>
-        <%= f.label :commenter %><br>
-        <%= f.text_field :commenter %>
-      </p>
-      <p>
-        <%= f.label :body %><br>
-        <%= f.text_area :body %>
-      </p>
-      <p>
-        <%= f.submit %>
-      </p>
-    <% end %>
-  </div>
-
-</div>
+<%= render "comments_form" %>
 
 
-
-<% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
-<% end %>
 
 Return to home by clicking "Sportify".
 </div>

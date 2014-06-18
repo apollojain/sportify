@@ -140,8 +140,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <% @games.each do |game| %>
   <%= link_to game.sport, game %> <br>
   <%= game.date %> <br>
-  <%= game.stattime.hour %>:<%= game.stattime.min %> - <%= game.endtime.hour %>:<%= game.endtime.min %>
-
+  <%= game.stattime.hour %>:<%= game.stattime.min %> - <%= game.endtime.hour %>:<%= game.endtime.min %><br>
+  <% if game.user == current_user %>
+    <%= link_to 'Delete', game, method: :delete, data: { confirm: 'Are you sure?' } %> 
+    <%= link_to 'Edit', edit_game_path(game) %> 
+  <% end %>
   | 
 
 <% end %>

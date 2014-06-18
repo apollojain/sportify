@@ -1,0 +1,29 @@
+
+<div id="comment" style="background-color:#C0C0C0; padding: 20px; width: 300px">
+  <h2 class="roboto" >Comments</h2>
+  <% @game.comments.each do |comment| %>
+    <p>
+      <strong><%= comment.user.first_name %> <%= comment.user.last_name %></strong> : <%= comment.body %>
+      <% if comment.user == current_user %>
+          <%= link_to 'Delete', [comment.game, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </p>
+  <% end %>
+  <button type="button" class="btn btn-primary" id="addcommentbtn">Add Comment</button>
+  <div id="addcomment" style="padding-left: 20px;">
+  <br>
+    <h4 class = "roboto">Add a comment:</h4>
+    <%= form_for([@game, @game.comments.build]) do |f| %>
+      <p>
+        <%= f.label :body %><br>
+        <%= f.text_area :body %>
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
+    <% end %>
+  </div>
+
+</div>

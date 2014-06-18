@@ -11,19 +11,20 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.label "Host" %><br>
+    <%= current_user.first_name %> <%= current_user.last_name %>
+  </div>
   <div class="field">
     <%= f.label :sport %><br>
     <%= f.text_field :sport, :size => 70 %>
   </div>
+  
   <div class="field">
     <%= f.label :address %><br>
     <%= f.text_field :address, :value => 'ex. "Underhill Field, Berkeley, CA"', :size => 70   %>
   </div>
-  <div class="field">
-    <%= f.label "Host" %><br>
-    <%= f.text_field :host %>
-  </div>
+
   <div class="field">
     <%= f.label :date %><br>
     <%= f.date_select :date %>

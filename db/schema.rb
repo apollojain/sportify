@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618080255) do
+ActiveRecord::Schema.define(version: 20140618171927) do
 
   create_table "comments", force: true do |t|
     t.string   "commenter"
@@ -19,9 +19,11 @@ ActiveRecord::Schema.define(version: 20140618080255) do
     t.integer  "game_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "comments", ["game_id"], name: "index_comments_on_game_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "games", force: true do |t|
     t.string   "sport"
@@ -34,7 +36,10 @@ ActiveRecord::Schema.define(version: 20140618080255) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "host"
+    t.integer  "user_id"
   end
+
+  add_index "games", ["user_id"], name: "index_games_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

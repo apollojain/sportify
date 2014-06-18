@@ -1,6 +1,7 @@
 class Game < ActiveRecord::Base
+	belongs_to :user
 	has_many :votes, dependent: :destroy
-	has_many :comments
+	has_many :comments, dependent: :destroy
 	validates :sport, presence: true
 	validates :address, presence: true
 	validates :date, presence: true

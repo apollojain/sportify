@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     #@games = Game.all
-    @games = Game.where("date between (?) and (?)", DateTime.now, DateTime.now + 120)
+    @games = Game.where("date between (?) and (?)", DateTime.now - 2, DateTime.now + 120)
   end
 
   # GET /games/1
@@ -16,6 +16,12 @@ class GamesController < ApplicationController
   def upvote
     @game = Game.find(params[:id])
     @game.votes.create
+    redirect_to(@game)
+  end
+
+  def downvote
+    @game = Game.find(params[:id])
+    @game.votes.destroy
     redirect_to(@game)
   end
 
@@ -32,7 +38,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
-
+		@game.user = current_user
     respond_to do |format|
       if @game.save
         format.html { redirect_to games_path, notice: 'Game was successfully created.' }
