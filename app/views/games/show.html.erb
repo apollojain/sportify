@@ -20,6 +20,11 @@ $(document).ready(function(){
 </p>
 
 <p>
+  <strong>Host:</strong>
+  <%= @game.host %>
+</p>
+
+<p>
   <strong>Date:</strong>
   <%= @game.date %>
 </p>
@@ -38,7 +43,7 @@ $(document).ready(function(){
   <strong>Attendees:</strong>
   <%= @game.attendees %>
   <%= pluralize(@game.votes.count, "attendee") %>
-  <%= button_to '+1', upvote_game_path(@game), method: :post %>
+  <div id="upvote"><%= button_to '+1', upvote_game_path(@game), method: :post %></div>
 </p>
 
     
@@ -75,6 +80,11 @@ $(document).ready(function(){
 
 </div>
 
+
+
+<% if user_signed_in? %>
+        Logged in as <strong><%= current_user.email %></strong>.
+<% end %>
 
 Return to home by clicking "Sportify".
 </div>

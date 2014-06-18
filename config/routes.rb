@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
   resources :games do
     resources :comments
     member do
       post 'upvote'
+      post 'downvote'
     end
   end
   root :to => redirect('/games')

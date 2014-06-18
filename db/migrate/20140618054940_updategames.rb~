@@ -1,0 +1,9 @@
+class Updategames < ActiveRecord::Migration
+  def self.up
+    add_column :lessons, :start, :datetime
+  end
+
+  def self.down
+  	remove_column :sport, :address, :date, :stattime, :endtime, :attendees, :description
+  end 
+end

@@ -19,6 +19,12 @@ class GamesController < ApplicationController
     redirect_to(@game)
   end
 
+  def downvote
+    @game = Game.find(params[:id])
+    @game.votes.destroy
+    redirect_to(@game)
+  end
+
   # GET /games/new
   def new
     @game = Game.new

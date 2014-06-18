@@ -21,13 +21,19 @@
     <%= f.text_field :address, :value => 'ex. "Underhill Field, Berkeley, CA"', :size => 70   %>
   </div>
   <div class="field">
+    <%= f.label "Host" %><br>
+    <%= f.text_field :host %>
+  </div>
+  <div class="field">
     <%= f.label :date %><br>
     <%= f.date_select :date %>
   </div>
+  
   <div class="field">
     <%= f.label "Start time" %><br>
     <%= f.time_select :stattime %>
   </div>
+
   <div class="field">
     <%= f.label "End time" %><br>
     <%= f.time_select :endtime %>

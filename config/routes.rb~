@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :games do
     resources :comments
     member do
       post 'upvote'
+      post 'downvote'
     end
   end
-  root 'default#index'
+  root :to => redirect('/games')
 
 
   # The priority is based upon order of creation: first created -> highest priority.
