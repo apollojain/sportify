@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
   resources :games do
     resources :comments
+    resources :players
     member do
       post 'upvote'
       post 'downvote'

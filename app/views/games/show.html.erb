@@ -40,18 +40,39 @@ $(document).ready(function(){
 </p>
 
 <p>
-  <strong>Attendees:</strong>
-  <%= @game.attendees %>
-  <%= pluralize(@game.votes.count, "attendee") %>
-  <div id="upvote"><%= button_to '+1', upvote_game_path(@game), method: :post %></div>
-</p>
-
-    
-
-<p>
   <strong>Description:</strong>
   <%= @game.description %>
 </p>
+
+<p><br>
+  <strong>Attendees:</strong><br>
+
+<% @game.players.each do |player| %>
+    <%= player.user.first_name %> <%= player.user.last_name %>  
+    <% if player.user == current_user %>
+      <script language='javascript'>
+          $(document).ready(function(){
+            $("#playerform").hide();
+          });
+
+      </script>
+        <%= link_to "| I'm not attending", [player.game, player],
+                   method: :delete,
+                   data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <br>
+<% end %>
+</p>
+
+<div id="playerform">
+  <%= form_for([@game, @game.players.build]) do |f| %>
+    <p>
+      <%= f.submit "RSVP" %>
+    </p>
+  <% end %>
+</div>
+<br>
+
 
 <%= render "comments_form" %>
 
