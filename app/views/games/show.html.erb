@@ -31,12 +31,12 @@ $(document).ready(function(){
 
 <p>
   <strong>Start time:</strong>
-  <%= @game.stattime.hour %>:<%= @game.stattime.min %>
+  <%= @game.stattime.strftime("%I:%M %p") %>
 </p>
 
 <p>
   <strong>End time:</strong>
-  <%= @game.endtime.hour %>:<%= @game.endtime.min %>
+  <%= @game.endtime.strftime("%I:%M %p") %>
 </p>
 
 <p>

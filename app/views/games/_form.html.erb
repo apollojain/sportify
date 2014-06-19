@@ -32,12 +32,12 @@
   
   <div class="field">
     <%= f.label "Start time" %><br>
-    <%= f.time_select :stattime %>
+    <%= f.time_select :stattime,  {ampm: true}  %>
   </div>
 
   <div class="field">
     <%= f.label "End time" %><br>
-    <%= f.time_select :endtime %>
+    <%= f.time_select :endtime,  {ampm: true}  %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
