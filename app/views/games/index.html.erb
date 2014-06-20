@@ -76,7 +76,15 @@ var splitGames = document.getElementById('gameaddress').innerHTML.split("|");
           var cur2 = document.getElementById("longitudes").innerHTML;
           cur2 = cur2 + longitude + ", ";
           document.getElementById("longitudes").innerHTML=cur2;
-        } 
+        }else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
+            setTimeout(function() {
+                Geocode(address);
+            }, 200);
+        }else{
+          alert('Geocode was not successful for the following reason: ' + status);
+
+        }
+
       });
     }
 
@@ -160,7 +168,12 @@ function currentLocation(){
     }, function() {
       handleNoGeolocation(true);
     });
-  } else {
+  }else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
+            setTimeout(function() {
+                Geocode(address);
+            }, 200);
+
+  }else {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
@@ -220,6 +233,11 @@ function addPin(address, data, sport) {
           infowindow.open(map,marker);
           });
         oms.addMarker(marker); //code added here 
+      }else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
+            setTimeout(function() {
+                Geocode(address);
+            }, 200);
+
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
