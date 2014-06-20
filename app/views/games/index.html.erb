@@ -76,18 +76,27 @@ var splitGames = document.getElementById('gameaddress').innerHTML.split("|");
           var cur2 = document.getElementById("longitudes").innerHTML;
           cur2 = cur2 + longitude + ", ";
           document.getElementById("longitudes").innerHTML=cur2;
-        }else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
-            setTimeout(function() {
-                Geocode(address);
-            }, 200);
-        }else{
-          //alert('Geocode was not successful for the following reason: ' + status);
-
-        }
-
+        } 
       });
     }
 
+
+/*function dafdfa() {
+
+  geocoder = new google.maps.Geocoder();
+  extraCode();
+  var latlng = new google.maps.LatLng(37.8717, -122.2728);
+  var mapOptions = {
+    zoom: 14,
+    center: latlng
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  for(i = 0; i < x.length - 1; i ++){
+      addPin(x[i], y[i], z[i]);
+    }
+
+}*/
 var map;
 function initialize() {
   var gm=google.maps;
@@ -168,12 +177,7 @@ function currentLocation(){
     }, function() {
       handleNoGeolocation(true);
     });
-  }else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
-            setTimeout(function() {
-                Geocode(address);
-            }, 200);
-
-  }else {
+  } else {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
@@ -233,11 +237,6 @@ function addPin(address, data, sport) {
           infowindow.open(map,marker);
           });
         oms.addMarker(marker); //code added here 
-      }else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
-            setTimeout(function() {
-                Geocode(address);
-            }, 200);
-
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
