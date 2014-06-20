@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     #@games = Game.all
-    @games = Game.where("date between (?) and (?)", DateTime.now - 0.5, DateTime.now + 20)
+    @games = Game.where("date between (?) and (?)", DateTime.now - 2, DateTime.now + 120)
   end
 
   # GET /games/1
