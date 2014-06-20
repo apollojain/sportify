@@ -21,8 +21,8 @@
   </div>
   
   <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address, :value => 'ex. "Underhill Field, Berkeley, CA"', :size => 70   %>
+    <%= f.label :address, "Address (ex. \"Underhill Field, Berkeley, CA\")" %><br>
+    <%= f.text_field :address, :size => 70   %>
   </div>
 
   <div class="field">
@@ -40,8 +40,8 @@
     <%= f.time_select :endtime,  {ampm: true}  %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, :value => 'ex. "Everyone bring cleats and shin guards. Someone bring a ball."', :size => "70x10" %>
+    <%= f.label :description, "Description (ex. \"Everyone bring cleats!\")" %><br>
+    <%= f.text_area :description, :size => "70x10" %>
   </div>
   <div class="actions">
     <%= f.submit %>
